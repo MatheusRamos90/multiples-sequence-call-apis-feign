@@ -3,13 +3,14 @@ package br.com.matheushramos.multiplessequencecallapisfeign.services;
 import br.com.matheushramos.multiplessequencecallapisfeign.client.dtos.CategoryResponse;
 import br.com.matheushramos.multiplessequencecallapisfeign.client.dtos.ProductResponse;
 import br.com.matheushramos.multiplessequencecallapisfeign.client.dtos.StockResponse;
+import br.com.matheushramos.multiplessequencecallapisfeign.config.RetryConfig;
 import br.com.matheushramos.multiplessequencecallapisfeign.controllers.dto.ProductIntegrationRequest;
 import br.com.matheushramos.multiplessequencecallapisfeign.exception.IntegrationException;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -30,6 +31,15 @@ public class IntegrationServiceImplTest {
 
     @Mock
     private StockIntegrationServiceImpl stockIntegrationService;
+
+    @Mock
+    private RetryConfig retryConfig;
+
+    @Before
+    public void setup() {
+        when(retryConfig.getAttempts()).thenReturn(3);
+        when(retryConfig.getDelay()).thenReturn(1L);
+    }
 
     @Test
     public void testSuccessfulIntegration() {

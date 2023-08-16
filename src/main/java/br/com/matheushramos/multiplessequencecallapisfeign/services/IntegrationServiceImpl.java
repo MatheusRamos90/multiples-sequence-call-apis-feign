@@ -2,17 +2,16 @@ package br.com.matheushramos.multiplessequencecallapisfeign.services;
 
 import br.com.matheushramos.multiplessequencecallapisfeign.controllers.dto.ProductIntegrationRequest;
 import br.com.matheushramos.multiplessequencecallapisfeign.dto.IntegrationSteps;
+import br.com.matheushramos.multiplessequencecallapisfeign.util.RetryAttemptsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static br.com.matheushramos.multiplessequencecallapisfeign.util.RetryAttemptsUtil.tryExecute;
-
 @Slf4j
 @Service
-public class IntegrationServiceImpl {
+public class IntegrationServiceImpl extends RetryAttemptsUtil {
 
     @Autowired
     private CategoryIntegrationServiceImpl categoryIntegrationService;

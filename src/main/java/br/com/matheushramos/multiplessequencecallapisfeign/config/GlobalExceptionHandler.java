@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IntegrationException.class)
     public ResponseEntity<ErrorResponse> handleIntegrationException(IntegrationException e) {
         log.error(e.getMessage(), e);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorResponse.builder()
+        return ResponseEntity.status(e.getStatus()).body(ErrorResponse.builder()
                         .status(e.getStatus())
                         .message(e.getMessage())
                 .build());
